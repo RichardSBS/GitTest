@@ -1,0 +1,68 @@
+class Notaus(QWidget):
+#Hier signals declarieren
+    def __init__(self, parent=None):
+        super(Notaus, self).__init__(parent)
+        
+        uic.loadUi("Notaus.ui", self)
+        
+        button.setAutoRepeat(True)
+        
+        = QTimer(self)
+        
+        
+        #so geht main
+        
+import sys
+from PyQt6 import QtWidgets
+from MyMainWindow import MyMainWindow
+
+
+app = QtWidgets.QApplication(sys.argv)
+dialog = MyMainWindow()
+dialog.show()
+sys.exit(app.exec())
+
+    #so geht meinWindow
+    
+    from PyQt6.QtWidgets import QMainWindow
+from HeatControlWidget import HeatControlWidget
+
+class MyMainWindow(QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.setWindowTitle("Heizungssteuerung")
+
+        self.setCentralWidget(HeatControlWidget(self))
+
+        self.setMinimumSize(1280, 720)
+        
+    #Timer schleife
+    self.timerKitchen = QTimer(self)
+        self.timerKitchen.timeout.connect(self.slotRealValueKitchen)
+        self.referenceValueKitchen = 0
+        self.realValueKitchen = 0
+        
+     def slotReferenceValueKitchen(self, referenceValue: int):
+        self.referenceValueKitchen = referenceValue
+
+        if self.timerKitchen.isActive() == False:
+            self.timerKitchen.start(1 * 1000)   
+    
+     def Kitchenvaluehaschanged(self,soll):
+        self.kitchentempsoll=int(soll)
+        if self.kitchentimer.isActive()==False:
+            self.kitchentimer.start(1*100)
+        #self.kitchenheater.emit(soll)
+
+    def Kichenvaluehastobe(self):
+        if self.kitchentempis < self.kitchentempsoll:
+            self.kitchentempis +=1
+        elif self.kitchentempis >self.kitchentempsoll:
+            self.kitchentempis -=1
+        else:
+            self.kitchentimer.stop()
+            
+           
+
+        self.kitchenheater.emit(self.kitchentempis)
