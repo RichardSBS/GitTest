@@ -1,0 +1,26 @@
+ = QDateTimeAxis()
+ setTickCount(int)
+ setGridLineColor(QColor()
+ setRange(QDateTime.currentDateTime(), QDateTime.currentDateTime().addDays(7))
+ = QValueAxis()
+ setTitleText
+ setRange
+ = QChart()
+        self.chart.addAxis(self.axis_x, Qt.AlignBottom)
+        self.chart_view = QChartView()
+        self.chart_view.setChart(self.chart)
+        self.my_layout = QHBoxLayout()
+        self.my_layout.addWidget(self.chart_view)
+
+        self.setLayout(self.my_layout)
+        self.series = QSplineSeries()
+        self.chart.addSeries(self.series)
+        self.series.setName("f(x) = x^2")
+        self.series.attachAxis(self.axis_x)
+        self.series.attachAxis(self.axis_y)
+         self.series.append
+          self.series_2 = QLineSeries()
+        self.chart.addSeries(self.series_2)
+        self.series_2.attachAxis(self.axis_time)
+        self.series_2.attachAxis(self.axis_percent)
+        self.series_2.setName("Prozent über Zeit")
